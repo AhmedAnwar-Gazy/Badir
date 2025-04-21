@@ -21,7 +21,6 @@ try{
 }
 
 
-
 //authorize($note['other_id'] == $userID);
 
 

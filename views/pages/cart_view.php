@@ -86,7 +86,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-            <h1>المدفوعات الاسلاميه:</h1>
+            <!-- <h1>المدفوعات الاسلاميه:</h1>
             <?php foreach ($islamic_payments as $islamic_payment): ?>
                 <div class="project">
                 <img src="views/media/images/<?= htmlspecialchars($islamic_payment['photo'] ?? "11.png") ?>" alt=" حملة " loading="lazy">
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach; ?> -->
 
 
 

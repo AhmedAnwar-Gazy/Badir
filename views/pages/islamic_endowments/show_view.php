@@ -28,14 +28,17 @@
               <!-- <label for="donation-section" class="section-label visually-hidden">خيارات التبرع</label> -->
 
               <section id="donation-section" class="bar_actions">
-<div class="donation-box">
-        <h2>مبلغ التبرع</h2>
-        <div class="donation-min-box">
-        <input type="number" id="customAmount" placeholder="قيمة المبلغ" oninput="updateDonateButton()" required min="0" max="<?= htmlspecialchars($endowments['0']['cost'] - $endowments['0']['donate_cost']) ?>" >
-        <a class="icon_cart" id="icon_nav_search" href=""><img class="icon_img" src="views/media/images/cart.png" alt="السلة" loading="lazy"></a>
-        </div>
-        <button id="donate" aria-label="التبرع">تبرع الآن</button>
-    </div>
+              <div class="donate-section">
+                <form action="/islamic_endowments_checkout" method="get" class="donate-section">
+                  <input class="inp" type="number" name="cost" placeholder="$" required  >
+                  <input type="hidden" name="endowment_id" value="<?= htmlspecialchars($endowments['0']['endowment_id']) ?>">
+                  <button type="submit" class="donate-btn" aria-label="تبرع الأن">تبرع الأن</button>
+                </form>
+                <form action="/islamic_endowments_addcart" method="post">
+                  <input type="hidden" name="endowment_id" value="<?= htmlspecialchars($islamic_endowment['endowment_id']) ?>">
+                  <button type="submit" class="donate_cart" aria-label="سله"><img src="views/media/images/cart.png" alt="السلة" loading="lazy"></button>
+                </form>
+              </div>
 </section>
 
 
@@ -77,7 +80,7 @@
     </div>
     <div class="news" >
     <h5>خبار المشروع</h5>
-        <div><p>تم جمع <?= htmlspecialchars((int)(($endowments['0']['donate_cost']/$endowments['0']['cost'])*100)) ?>% من التبرعات</p></div>
+        <div><p>تم جمع <?= htmlspecialchars(number_format((($endowments['0']['donate_cost']/$endowments['0']['cost'])*100) ,2) )?>% من التبرعات</p></div>
         <!-- <div>30%<p>تم الانتهاء من المرحله الاولى </p></div> -->
     </div>
 

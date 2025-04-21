@@ -3601,6 +3601,11 @@ table input[type="text"]:focus, table select:focus {
     box-shadow: var(--card-shadow);
 }
 
+.footer_linK {
+    color: white;
+}
+
+
   
   /* استجابة الشاشة */
   @media (max-width: 768px) {

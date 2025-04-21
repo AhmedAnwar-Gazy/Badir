@@ -9,12 +9,12 @@
             <img src="views/media/images/bader.png" alt="">
         </div>
         <div class="who_are_we">
-            <h1><a href="/about"> من نحن؟ </a></h1><hr>
+            <h1><a  class="footer_linK" href="/about"> من نحن؟ </a></h1><hr>
             <p>بادر هي منصة رقمية تهدف الى ربط المتبرعين 
                 بالمشاريع الانسانية والتنموية حول العالم بكل شفافية وسهولة. لنكون جسراً بين 
                  الرغبة في العطاء وحاجة المجتمع. من خلال توفير قنوات 
                  آمنة وفعالة لإدارة التبرعات وتوجيهها الى مكانها الصحيح
-            </p><br><br>
+            </p>
             <div class="icon_foter">
                 <a id="whats_icon" class="whats_icon" href="https://wa.me/+967775432120"><img src="views/media/images/whatsapp.png" alt="وتساب"></a>
                 <a id="email_icon" class="email_icon" href="mailto:badir.charity.org@gmail.com"><img src="views/media/images/mail.png" alt="جيميل"></a>
@@ -25,12 +25,12 @@
             </div>
                 <div class="service_and_privacy_policy_agreement">
                 <h1> اتفاقية الخدمة وسياسات الخصوصية</h1><hr>
-                <a id="terms_and_conditions ah" class="terms_and_conditions" href="/policies_privacy">الشروط والأحكام</a><br>
+                <a id="terms_and_conditions ah" class="footer_linK" href="/policies_privacy">الشروط والأحكام</a><br>
             </div>
         <div class="contact_us">
-            <h1>  <a href="/contact"> تواصل معنا   </a></h1><hr>
+            <h1>  <a href="/contact" class="footer_linK"> تواصل معنا   </a></h1><hr>
             <p>إذا واجهتك مشكلة أو لديك أي استفسار لا تتردد في التواصل معنا</p>
-            <h1>إرسال إشعار</h1><hr>
+
         </div>
     
        

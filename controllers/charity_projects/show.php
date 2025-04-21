@@ -30,6 +30,7 @@ try {
         P.short_description,
         P.full_description,
         P.type,
+        p.city,
         P.cost,
         COALESCE(SUM(B.cost), 0) AS collected_money,
         COALESCE(COUNT(B.USER_ID)) AS donators_count,

@@ -35,8 +35,8 @@
               <p><strong style="display: inline;">$ <?= htmlspecialchars($campaign['collected_money']) ?>/</strong><?= htmlspecialchars($campaign['cost']) ?></p>
             </div>
           </div>
+          
           <div class="donate-section">
-
               <!-- إذا كان المستخدم مسجل الدخول -->
               <form action="/charity_campaigns_checkout" method="get" class="donate-section">
                 <input class="inp" type="number" name="cost" placeholder="$" required min="0" max="<?= htmlspecialchars($campaign['cost'] - $campaign['collected_money']) ?>">
@@ -47,10 +47,8 @@
                 <input type="hidden" name="campaign_id" value="<?= htmlspecialchars($campaign['campaign_id']) ?>">
                 <button type="submit" class="donate_cart"><img src="views/media/images/cart.png" alt="السلة" loading="lazy" aria-label="السلة"></button>
               </form>
-
-
-
           </div>
+
           <div class="details">
             <a href="/charity_campaigns_show?campaign_id=<?= htmlspecialchars($campaign['campaign_id']) ?>">عرض التفاصيل</a>
           </div>

@@ -10,12 +10,12 @@
         <div class="imgs">
             <img src="views/media/images/<?= $projects['0']['photo'] ?? "11.png" ?>" alt=" " loading="lazy">
         </div>
-        <p class="localshin">المنطقة تعز</p>
+        <p class="localshin">المنطقة <?= htmlspecialchars($projects['0']['city']) ?> </p>
         <div>
-            <h5> <?= $projects['0']['name'] ?> </h5>
-            <p class="details_p"><?= $projects['0']['short_description'] ?></p>
+            <h5> <?= htmlspecialchars($projects['0']['name']) ?> </h5>
+            <p class="details_p"><?= htmlspecialchars( $projects['0']['short_description'] )?></p>
         </div>
-        <!-- <h5>رقم الحملة : <?= $projects['0']['campaign_id'] ?></h5> -->
+        <h5>رقم الحملة : <?= $projects['0']['project_id'] ?></h5>
         <div class="progress-bar">
             <div class="progress" style="text-align: left;width:<?= htmlspecialchars(($projects['0']['collected_money']/$projects['0']['cost'])*100) ?>% " >%<?= htmlspecialchars((int)(($projects['0']['collected_money']/$projects['0']['cost'])*100)) ?></div>
         </div>
@@ -23,13 +23,19 @@
             <p><strong style="display: inline;">SR <?= htmlspecialchars($projects['0']['collected_money']) ?>/</strong><?= htmlspecialchars($projects['0']['cost']) ?> </p>
         </div>
         <section class="bar_actions">
-            <div class="donation-box">
-                <h2>مبلغ التبرع</h2>
-                <div class="donation-min-box">
-                    <input type="number" id="customAmount" placeholder="قيمة المبلغ" oninput="updateDonateButton()" required min="0" max="<?= htmlspecialchars($project['0']['cost'] - $project['0']['collected_money']) ?>" >
-                    <a class="icon_cart" id="icon_nav_search" href=""><img class="icon_img" src="views/media/images/cart.png" alt=""></a>
-                </div>
-                <button id="donate">تبرع الآن</button>
+
+            <div class="donate-section">
+
+              <form action="/charity_projects_checkout" method="get" class="donate-section">
+
+                <input class="inp" type="number" name="cost" placeholder="$" required min="0" max="<?= htmlspecialchars($project['cost'] - $project['collected_money']) ?>" >
+                <input type="hidden" name="project_id" value="<?= htmlspecialchars($projects['0']['project_id']) ?>">
+                <button type="submit" class="donate-btn" aria-label="التبرع">تبرع الأن</button>
+              </form>
+              <form action="/charity_projects_addcart" method="post">
+                <input type="hidden" name="project_id" value="<?= htmlspecialchars($projects['0']['project_id']) ?>">
+                <button type="submit" class="donate_cart" aria-label="السلة"><img src="views/media/images/cart.png" alt="السلة" loading="lazy"></button>
+              </form>
             </div>
         </section>
     </section>
@@ -85,7 +91,7 @@
         </div>
     <div class="news" >
     <h5>اخبار المشروع</h5>
-        <div><p>تم جمع <?= htmlspecialchars((int)(($projects['0']['collected_money']/$projects['0']['cost'])*100)) ?>% من التبرعات</p></div>
+        <div><p>تم جمع <?= htmlspecialchars(number_format((($projects['0']['collected_money']/$projects['0']['cost'])*100),2)) ?>% من التبرعات</p></div>
         <!-- <div>30%<p>تم الانتهاء من المرحله الاولى </p></div> -->
     </div>
 
