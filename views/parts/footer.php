@@ -30,7 +30,10 @@
         <div class="contact_us">
             <h1>  <a href="/contact" class="footer_linK"> تواصل معنا   </a></h1><hr>
             <p>إذا واجهتك مشكلة أو لديك أي استفسار لا تتردد في التواصل معنا</p>
-
+<br> <br>
+            <h1>  <a href="/statistics_index" class="footer_linK"> الاحصائيات  </a></h1><hr>
+            <p> لي معرفة المزيد عن احصائيات بادر </p>
+            
         </div>
           
     </div>
