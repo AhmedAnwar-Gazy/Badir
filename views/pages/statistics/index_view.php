@@ -6,8 +6,8 @@
 <main>
   <section class="container_card_statistics">
     <div class="nav_links_islamic_payments">
-    <a class="zakat" href="/islamic_payments_zakat">المخططات الرسوميه</a>
-    <a class="zakat" href="/islamic_payments_zakat">المزيد </a>
+    <a class="zakat" href="/statistics_show">المخططات الرسوميه</a>
+    <!-- <a class="zakat" href="/islamic_payments_zakat">المزيد </a> -->
     </div>
     <div class="card_statistics_grup">
     <article class="card_statistics">

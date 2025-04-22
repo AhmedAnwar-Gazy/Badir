@@ -67,5 +67,6 @@ try {
 
 //authorize($note['other_id'] == $userID);
 
+visible($campaigns);
 
 require "views/pages/charity_projects/show_view.php";

@@ -21,7 +21,9 @@ try{
 }
 
 
-//authorize($note['other_id'] == $userID);
+
+
+visible($campaigns);
 
 
 

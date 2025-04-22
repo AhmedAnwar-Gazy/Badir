@@ -104,6 +104,7 @@ try {
     abort(500);
 }
 
+visible($campaigns);
 
 header("Location: " . $_SERVER["HTTP_REFERER"]);
 die();

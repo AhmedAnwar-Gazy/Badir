@@ -51,4 +51,7 @@ try {
     error_log($e->getMessage());
     abort(500);
 }
+
+visible($campaigns);
+
 require "views/pages/islamic_endowments/show_view.php";
