@@ -15,13 +15,14 @@ $_SESSION['verification_code'] = $verification_code;
 $_SESSION['code_expiry'] = time() + 300;
 
 $heading = "Create test";
+ 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-  if (isset($_POST['submit'])) {
-
+  if ($_POST['submit'] == 'registration') {
+dd('انشا مستخدم جديد ');
     $_SESSION['process_type'] = 'register';
     $verification_code = rand(100000, 999999);
     $_SESSION['verification_code'] = $verification_code;
@@ -70,7 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header("Location: /users_verification_view");
       exit();
     }
-  } elseif (isset($_POST['btn_chang_password'])) {
+  } elseif ($_POST['submit'] == 'btn_chang_password') {
+
+    dd('تغير كلمة السر');
     // Handle the change password request
     $_SESSION['process_type'] = 'change_password';
     $verification_code = rand(100000, 999999);

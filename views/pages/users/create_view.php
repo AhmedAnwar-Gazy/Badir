@@ -152,7 +152,7 @@ if (isset($_SESSION['ban_time']) && $_SESSION['ban_time'] > time()) {
           <input type="checkbox" id="notifications" name="notifications" checked>
         </div>
         <div class="form-group box_h">
-          <button type="submit" name="submit" aria-label="تسجيل مستخدم">تسجيل مستخدم</button>
+          <button type="submit" name="submit" value="registration" aria-label="تسجيل مستخدم">تسجيل مستخدم</button>
         </div>
       </form>
       <!-- </div> -->

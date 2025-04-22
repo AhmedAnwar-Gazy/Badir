@@ -22,7 +22,7 @@
         <label for="confirm_password"> تاكيد كلمة المرور</label>
         <input id="name" type="text" name="confirm_password" placeholder=" تاكيد كلمة المرور" require></div>
         </div>
-        <button type = "submit" class="btn_chang_password" id="btn_chang_password" name="btn_chang_password" aria-label="تغيير كلمة المرور">تغيير كلمة المرور </button>
+        <button type = "submit" class="btn_chang_password" id="btn_chang_password"  name="submit" value="btn_chang_password"  aria-label="تغيير كلمة المرور">تغيير كلمة المرور </button>
         </form>
     
       
