@@ -96,7 +96,7 @@
       <div class="header">إحصاءات عامة</div>
       <div class="filters">
         <select id="categoryFilter">
-          <option value="all">الاحصائيات جميع</option>
+          <option value="all">جميع الاحصائيات </option>
           <option value="projects">المشاريع</option>
           <option value="endowments">الاوقاف</option>
           <option value="campaigns">الحملات الخيريه</option>
