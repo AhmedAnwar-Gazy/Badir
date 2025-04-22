@@ -39,6 +39,12 @@ function authorize($condition, $status = Response::HTTP_FORBIDDEN)
     }
 }
 
+function visible($condition, $status = Response::HTTP_FORBIDDEN)
+{
+    if (empty($condition)) {
+        abort($status);
+    }
+}
 
 
 function logIn($user)
@@ -47,7 +53,8 @@ function logIn($user)
     $_SESSION['user'] =  [
         'email' => $user['email'],
         'id' => $user['user_id'],
-        'type' => $user['type']
+        'type' => $user['type'],
+        'photo' => $user['photo']
     ];
     session_regenerate_id(true);
 }

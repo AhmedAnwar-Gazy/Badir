@@ -36,8 +36,8 @@
         <div class="all_icon_nav">
             <!-- <a href=""><img src="" alt=""></a> -->
 
-            <?php if ($_SESSION['user'] ?? false) : ?>
-            <a class="icon_nav_profile" id="icon_nav_profile" href="/users_show"><img class="icon_img" src="views/media/images/user.png" alt="الحساب الشخصي"></a>
+            <?php  if ($_SESSION['user'] ?? false) : ?>
+            <a class="icon_nav_profile" id="icon_nav_profile" href="/users_show"><img class="icon_img" src="views/media/images/<?= $_SESSION['user']['photo']?>" alt="الحساب الشخصي"></a>
             <a class="icon_nav_search" id="icon_nav_search" href="/cart"><img class="icon_img" src="views/media/images/cart.png" alt="السله"></a>
             <form action="/sessions_destroy" class="but_sgin" method="post">
                 <input type="hidden" name="_method" value="DELETE">
