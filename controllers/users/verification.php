@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
   if ($_POST['submit'] == 'registration') {
-dd('انشا مستخدم جديد ');
+
     $_SESSION['process_type'] = 'register';
     $verification_code = rand(100000, 999999);
     $_SESSION['verification_code'] = $verification_code;
@@ -73,7 +73,7 @@ dd('انشا مستخدم جديد ');
     }
   } elseif ($_POST['submit'] == 'btn_chang_password') {
 
-    dd('تغير كلمة السر');
+
     // Handle the change password request
     $_SESSION['process_type'] = 'change_password';
     $verification_code = rand(100000, 999999);
