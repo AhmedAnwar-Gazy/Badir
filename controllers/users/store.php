@@ -12,55 +12,16 @@ use core\Database;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-
-
   $db = App::resolve(Database::class);
 
   $data = $_SESSION['user_data'];
 
   $errors = [];
-
-
-  // التحقق من صحة البيانات
-  // if (!Validator::string($data['username'] ?? '', 3, 255)) {
-  //   $errors['username'] = "اسم المستخدم يجب أن يكون بين 3 و255 حرفًا.";
-  // }
-
-  // if (!Validator::email($data['email'] ?? '')) {
-  //   $errors['email'] = "البريد الإلكتروني غير صالح.";
-  // }
-
-  // if (!Validator::string($data['password'] ?? '', 6, 255)) {
-  //   $errors['password'] = "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.";
-  // }
-
-  // if (!Validator::string($data['country'] ?? '', 2, 255)) {
-  //   $errors['country'] = "البلد غير صالح.";
-  // }
-
-  // if (!Validator::string($data['city'] ?? '', 2, 255)) {
-  //   $errors['city'] = "المدينة غير صالحة.";
-  // }
-
-  // if (!Validator::string($data['street'] ?? '', 2, 255)) {
-  //   $errors['street'] = "الشارع غير صالح.";
-  // }
-
-  // if (!Validator::phone($data['phone'] ?? '')) {
-  //     $errors['phone'] = "رقم الهاتف غير صالح.";
-  // }
-
-
-  // if (isset($_POST["submit"])) {
-
-
-
+  // cheak if the code is empty
   $entered_code = $_POST['verification_code'];
   $saved_code = $_SESSION['verification_code'];
   $code_expiry = $_SESSION['code_expiry'];
   $current_time = time();
-  // dd($_SESSION['verification_code']);
   //  cheak if the code is expired
   if ($current_time > $code_expiry) {
     $_SESSION['error'] = "كود التحقق منتهي الصلاحية. يرجى إعادة الإرسال.";
@@ -68,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: /users_verification_view?error = " . urlencode("كود التحقق منتهي الصلاحية. يرجى إعادة الإرسال."));
     exit();
   }
-  // dd($_SESSION['verification_code']);
-
 
   // cheak if the code is correct
   if ($entered_code != $saved_code) {
@@ -79,15 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   //  get the user data from the sessionn
-  // $data = $_SESSION['user_data'];
-  // dd($_SESSION[$_POST['verification_code']]); print the session data 
-  //   var_dump($entered_code, $saved_code); // to find the type and compare between them
-  // exit;
   if ($entered_code === $saved_code) {
     if ($_SESSION['process_type'] === 'register') {
       $data = $_SESSION['user_data'];
       // dd($_SESSION['verification_code']);
-
 
 
       // cheak if the email is already used
@@ -155,10 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           ]
         );
 
-
-
-
-
         //get the user from the database
         $user = $db->query('SELECT * FROM users WHERE email = :email', [
           'email' => $data['email']
@@ -191,12 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email' => filter_var($data['email'], FILTER_SANITIZE_EMAIL)
       ])->fetch();
 
-
-      // if ($query) {
-      //   $errors['email'] = "البريد الإلكتروني مستخدم مسبقًا.";
-      //   $_SESSION['errors'] = "البريد الإلكتروني مستخدم مسبقًا";
-      // }  
-
       if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         header("Location:" . $_SERVER["HTTP_REFERER"]);
@@ -206,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       try {
         // require('controllers/parts/image_loader.php');
-        
+
         $db->query(
           "UPDATE users SET password = :password WHERE email = :email",
           [
@@ -229,8 +173,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // redirect to the home page
         $_SESSION['success'] = "تم تغيير كلمة المرور بنجاح. مرحبًا بك في موقعنا!";
-        $error = urlencode("تم تغيير كلمة المرور بنجاح. مرحبًا بك في موقعنا!");
-        header("Location: /?error=$error");
+        $success = urlencode("تم تغيير كلمة المرور بنجاح. مرحبًا بك في موقعنا!");
+        header("Location: /?success=$success");
         exit();
       } catch (PDOException $e) {
         error_log($e->getMessage());

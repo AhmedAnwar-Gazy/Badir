@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\Location;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
 require 'vendor/autoload.php';
 $config = require 'config.php';
 $verification_code = strval(rand(100000, 999999));
@@ -19,17 +20,42 @@ $heading = "Create test";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
   // $_SESSION['user_data'] = $_POST;
 
+
+  // التحقق من صحة البيانات
+  // if (!Validator::string($data['username'] ?? '', 3, 255)) {
+  //   $errors['username'] = "اسم المستخدم يجب أن يكون بين 3 و255 حرفًا.";
+  // }
+
+  // if (!Validator::email($data['email'] ?? '')) {
+  //   $errors['email'] = "البريد الإلكتروني غير صالح.";
+  // }
+
+  // if (!Validator::string($data['password'] ?? '', 6, 255)) {
+  //   $errors['password'] = "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.";
+  // }
+
+  // if (!Validator::string($data['country'] ?? '', 2, 255)) {
+  //   $errors['country'] = "البلد غير صالح.";
+  // }
+
+  // if (!Validator::string($data['city'] ?? '', 2, 255)) {
+  //   $errors['city'] = "المدينة غير صالحة.";
+  // }
+
+  // if (!Validator::string($data['street'] ?? '', 2, 255)) {
+  //   $errors['street'] = "الشارع غير صالح.";
+  // }
+
+  // if (!Validator::phone($data['phone'] ?? '')) {
+  //     $errors['phone'] = "رقم الهاتف غير صالح.";
+  // }
 
   if ($_POST['submit'] == 'registration') {
 
     $_SESSION['process_type'] = 'register';
-    // $verification_code = rand(100000, 999999);
-    // $_SESSION['verification_code'] = $verification_code;
-    // $_SESSION['code_expiry'] = time() + 300;
-
-    // }
 
     //validate the data
     $address = htmlspecialchars($_POST['address'] ?? '');
@@ -78,10 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle the change password request
     $_SESSION['process_type'] = 'change_password';
-
-    // $verification_code = rand(100000, 999999);
-    // $_SESSION['verification_code'] = $verification_code;
-    // $_SESSION['code_expiry'] = time() + 300;
     $message = htmlspecialchars($_POST['descripe_problem'] ?? '');
     $_SESSION['change_password_data'] = $_POST;
 
@@ -107,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit();
     }
 
-    // Proceed with changing the password logic here
+    // Procces with changing the password logic here
     // ... 
     $db = App::resolve(Database::class);
     $user = $db->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->fetch();
@@ -130,8 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-  if (isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'change_password' ) {
-    // $_SESSION['chanchange_password_datage'] = $_POST;
+  if (isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'change_password') {
     // dd($_SESSION['change_password_data']);
     $message = htmlspecialchars($_SESSION['change_password_data']['descripe_problem'] ?? '');
     $email = $_SESSION['change_password_data']['email'] ?? '';
@@ -139,22 +160,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header("Location: /users_verification_view? success = " . urlencode("تم إرسال الكود بنجاح، تحقق من بريدك."));
       exit();
     }
-  }elseif(isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'register') {
+  } elseif (isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'register') {
     $message = htmlspecialchars($_SESSION['user_data']['descripe_problem'] ?? '');
     $email = $_SESSION['user_data']['email'] ?? '';
     if (sendEmail($config, $email, $message, $verification_code)) {
       header("Location: /users_verification_view? success = " . urlencode("تم إرسال الكود بنجاح، تحقق من بريدك."));
       exit();
     }
-  }
-  
-  else {
+  } else {
     // If the form is not submitted, redirect to the create view
     header("Location: /users_create_view?error = Invalid reeeequest");
     exit();
   }
 
-  
+
   // Check if the user is logged in and has a session
   $email = $_SESSION['user_email'] ?? $_COOKIE['user_email'] ?? '';
 
