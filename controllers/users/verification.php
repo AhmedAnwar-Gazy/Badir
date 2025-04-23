@@ -10,29 +10,31 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 $config = require 'config.php';
-$verification_code = rand(100000, 999999);
+$verification_code = strval(rand(100000, 999999));
 $_SESSION['verification_code'] = $verification_code;
 $_SESSION['code_expiry'] = time() + 300;
 
+
 $heading = "Create test";
- 
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  // $_SESSION['user_data'] = $_POST;
 
 
   if ($_POST['submit'] == 'registration') {
 
     $_SESSION['process_type'] = 'register';
-    $verification_code = rand(100000, 999999);
-    $_SESSION['verification_code'] = $verification_code;
-    $_SESSION['code_expiry'] = time() + 300;
+    // $verification_code = rand(100000, 999999);
+    // $_SESSION['verification_code'] = $verification_code;
+    // $_SESSION['code_expiry'] = time() + 300;
 
     // }
 
     //validate the data
     $address = htmlspecialchars($_POST['address'] ?? '');
     $message = htmlspecialchars($_POST['descripe_problem'] ?? '');
+    // dd($message);
     $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
     $_SESSION['user_email'] = $email;
     setcookie(
@@ -76,9 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle the change password request
     $_SESSION['process_type'] = 'change_password';
-    $verification_code = rand(100000, 999999);
-    $_SESSION['verification_code'] = $verification_code;
-    $_SESSION['code_expiry'] = time() + 300;
+
+    // $verification_code = rand(100000, 999999);
+    // $_SESSION['verification_code'] = $verification_code;
+    // $_SESSION['code_expiry'] = time() + 300;
     $message = htmlspecialchars($_POST['descripe_problem'] ?? '');
     $_SESSION['change_password_data'] = $_POST;
 
@@ -113,6 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header("Location:/users_changePassword_view?error={$error}");
       exit();
     }
+
+
     if (sendEmail($config, $email, $message, $verification_code)) {
       header("Location: /users_verification_view");
       exit();
@@ -124,31 +129,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+  // dd($_SESSION['verification_code']); 
+  // $verification_code = rand(100000, 999999);
+  // $_SESSION['verification_code'] = $verification_code;
+  // $_SESSION['code_expiry'] = time() + 300;
   // Check if the user is logged in and has a session
   $email = $_SESSION['user_email'] ?? $_COOKIE['user_email'] ?? '';
+
   $message = $_SESSION['user_data']['descripe_problem'] ?? '';
   $address = $_SESSION['user_data']['address'] ?? '';
+  // dd($message); 
 
-  sendEmail($config, $email, $message, $verification_code); // send the email with the verification code
+  if (sendEmail($config, $email, $message, $verification_code)) {
+    header("Location: /users_verification_view");
+    exit();
+  } // send the email with the verification code
+  // var_dump($verification_code, $_SESSION['verification_code']);
 } else {
+
   // If the request method is not POST or GET, redirect to the create view
   error_log("Invalid request method: " . $_SERVER['REQUEST_METHOD']);
   header("Location: /users_create_view");
   exit();
 }
 
-
+// dd($message); 
 
 
 function sendEmail($config, $email, $message, $verification_code) // this function sends the email
 {
+  // dd($_SESSION['verification_code']); 
   if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $error = urlencode("البريد الإلكتروني غير صالح أو انتهت الجلسة");
     header("Location:/users_create_view?error={$error}");
     exit();
   }
 
-  blockUser();
+  // blockUser();
 
   $mail = new PHPMailer(true);
 

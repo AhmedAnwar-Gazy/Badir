@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $db = App::resolve(Database::class);
 
-  // $data = $_SESSION['user_data'];
+  $data = $_SESSION['user_data'];
 
   $errors = [];
 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $saved_code = $_SESSION['verification_code'];
   $code_expiry = $_SESSION['code_expiry'];
   $current_time = time();
-
+  // dd($_SESSION['verification_code']);
   //  cheak if the code is expired
   if ($current_time > $code_expiry) {
     $_SESSION['error'] = "كود التحقق منتهي الصلاحية. يرجى إعادة الإرسال.";
@@ -68,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: /users_verification_view?error = " . urlencode("كود التحقق منتهي الصلاحية. يرجى إعادة الإرسال."));
     exit();
   }
+  // dd($_SESSION['verification_code']);
+
 
   // cheak if the code is correct
   if ($entered_code != $saved_code) {
@@ -78,11 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   //  get the user data from the sessionn
   // $data = $_SESSION['user_data'];
-
+  // dd($_SESSION[$_POST['verification_code']]); print the session data 
+  //   var_dump($entered_code, $saved_code); // to find the type and compare between them
+  // exit;
   if ($entered_code === $saved_code) {
     if ($_SESSION['process_type'] === 'register') {
       $data = $_SESSION['user_data'];
-
+      // dd($_SESSION['verification_code']);
 
 
 
@@ -179,8 +183,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       $data = $_SESSION['change_password_data'];
       // $email = $_SESSION['user_email'];
-      $new_password = $_SESSION['new_password'];
-      $confirm_password = $_SESSION['confirm_password'];
+      $new_password = $data['new_password'];
+      $confirm_password = $data['confirm_password'];
 
       // cheak if the email is already used
       $query = $db->query('SELECT * FROM users WHERE email = :email', [
@@ -202,12 +206,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       try {
         // require('controllers/parts/image_loader.php');
+        
         $db->query(
           "UPDATE users SET password = :password WHERE email = :email",
           [
             'password' => password_hash($new_password, PASSWORD_BCRYPT),
             'email' => filter_var($data['email'], FILTER_SANITIZE_EMAIL)
           ]
+
         );
 
 
@@ -215,8 +221,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $db->query('SELECT * FROM users WHERE email = :email', [
           'email' => $data['email']
         ])->fetch();
-
-        // 
 
         login($user);
 
