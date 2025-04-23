@@ -119,7 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (sendEmail($config, $email, $message, $verification_code)) {
-      header("Location: /users_verification_view");
+      header("Location: /users_verification_view? success = " . urlencode("تم إرسال الكود بنجاح، تحقق من بريدك."));
+
       exit();
     }
   } else {
@@ -129,10 +130,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-  // dd($_SESSION['verification_code']); 
-  // $verification_code = rand(100000, 999999);
-  // $_SESSION['verification_code'] = $verification_code;
-  // $_SESSION['code_expiry'] = time() + 300;
+  if (isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'change_password' ) {
+    // $_SESSION['chanchange_password_datage'] = $_POST;
+    // dd($_SESSION['change_password_data']);
+    $message = htmlspecialchars($_SESSION['change_password_data']['descripe_problem'] ?? '');
+    $email = $_SESSION['change_password_data']['email'] ?? '';
+    if (sendEmail($config, $email, $message, $verification_code)) {
+      header("Location: /users_verification_view? success = " . urlencode("تم إرسال الكود بنجاح، تحقق من بريدك."));
+      exit();
+    }
+  }elseif(isset($_SESSION['process_type']) && $_SESSION['process_type'] === 'register') {
+    $message = htmlspecialchars($_SESSION['user_data']['descripe_problem'] ?? '');
+    $email = $_SESSION['user_data']['email'] ?? '';
+    if (sendEmail($config, $email, $message, $verification_code)) {
+      header("Location: /users_verification_view? success = " . urlencode("تم إرسال الكود بنجاح، تحقق من بريدك."));
+      exit();
+    }
+  }
+  
+  else {
+    // If the form is not submitted, redirect to the create view
+    header("Location: /users_create_view?error = Invalid reeeequest");
+    exit();
+  }
+
+  
   // Check if the user is logged in and has a session
   $email = $_SESSION['user_email'] ?? $_COOKIE['user_email'] ?? '';
 
@@ -149,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // If the request method is not POST or GET, redirect to the create view
   error_log("Invalid request method: " . $_SERVER['REQUEST_METHOD']);
-  header("Location: /users_create_view");
+  header("Location: /users_create_view?error = {Invalid request}");
   exit();
 }
 
@@ -160,7 +182,7 @@ function sendEmail($config, $email, $message, $verification_code) // this functi
 {
   // dd($_SESSION['verification_code']); 
   if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $error = urlencode("البريد الإلكتروني غير صالح أو انتهت الجلسة");
+    $error = urlencode("البريد الإلكتروني غير صالح أو انتهت الجلسة"); // here the problem
     header("Location:/users_create_view?error={$error}");
     exit();
   }
