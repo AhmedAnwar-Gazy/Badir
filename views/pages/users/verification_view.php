@@ -39,6 +39,13 @@ require('views/parts/navgtion.php');
     <div>
       <a href="/users_verification">إعادة إرسال الكود </a>
     </div>
+        <?php
+          if (!empty($_GET)) {
+              foreach ($_GET as $key => $value) {
+                  echo "<h1 style='color:red'>".htmlspecialchars($value) . "</h1>";
+              }
+          }
+        ?>
   </section>
   <!-- 
   <form action="/users_store" method="POST">

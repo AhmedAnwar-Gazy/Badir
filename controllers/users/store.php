@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           [
             'username' => htmlspecialchars($data['username']),
             'password' => password_hash($data['password'], PASSWORD_BCRYPT),
-            'photo' => $filenamenew,
+            'photo' => $filenamenew ?? "user.png",
             'email' => filter_var($data['email'], FILTER_SANITIZE_EMAIL),
             'type' => 'normal',
             'country' =>  htmlspecialchars($data['country']),
