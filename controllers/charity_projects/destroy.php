@@ -1,7 +1,8 @@
 <?php
 $heading = "one test";
-use core\App ;
-use core\Database ;
+
+use core\App;
+use core\Database;
 
 
 $db = App::resolve(Database::class);
@@ -12,12 +13,10 @@ try {
         [
             'project_id' => $_POST['project_id']
         ]
-    ); 
+    );
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء حفظ البعانات";
-    header("Location: /charity_campaigns_create");
-    exit();
+    abort(500);
 }
 
 

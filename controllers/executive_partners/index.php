@@ -19,10 +19,10 @@ try {
         $query .= " AND MATCH(name, description, more_information) AGAINST (:search IN NATURAL LANGUAGE MODE)";
         $params['search'] = $search;
     }
-    if ($_GET['submit'] == "foryou") {
-        $query .= " AND u.user_id = :user_id";
-        $params['user_id'] = $_SESSION['user']['id'];
-    }
+    // if (isset($_GET['submit']) && $_GET['submit'] == "foryou") {
+    //     $query .= " AND u.user_id = :user_id";
+    //     $params['user_id'] = $_SESSION['user']['id'];
+    // } لا يوجد يوزر ايدي في هذا الجدول كما لا يرتبط هذا الجدول بالمشاريع
 
 
     // 👌 Finalize Query
@@ -33,9 +33,7 @@ try {
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء جلب البيانات";
-    header("Location: /partners");
-    exit();
+    abort(500);
 }
 
 // foreach($partners as $key => $value){

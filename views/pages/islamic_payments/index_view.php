@@ -4,67 +4,46 @@
 <?php require('views/parts/header.php') ?>
 
 <main>
-  <section class="islamic_payments_index">
-    <div class="nav_links_islamic_payments">
-      <a class="zakat" href="">الزكاة</a>
-      <a class="charity" href="">الصدقة</a>
-      <a class="ransom" href="">الفدية</a>
-      <a class="atonement" href="">الكفارة و النذور</a>
-      <a class="aqeeqah" href="">العقيقة</a>
-    </div>
+  <!-- <label for="islamic-payments-section" class="section-label visually-hidden">قسم التبرعات الإسلامية</label> -->
+
+  <section id="islamic-payments-section" class="islamic_payments_index">
+    <!-- <div class="nav_links_islamic_payments">
+      <a class="zakat" href="/islamic_payments_zakat">الزكاة</a>
+      <a class="charity" href="/islamic_payments_sadaqah">الصدقة</a>
+      <a class="ransom" href="/islamic_payments_fidya">الفدية</a>
+      <a class="atonement" href="/islamic_payments_kaffara">الكفارة و النذور</a>
+      <a class="aqeeqah" href="/islamic_payments_aqiqah">العقيقة</a>
+    </div> -->
     <!-- الصدقه -->
-    <section class="Carousel_card">
-      <!-- حاوية البطاقات -->
-
-
+    <!-- <label for="payments-carousel" class="section-label visually-hidden">عرض التبرعات الإسلامية</label> -->
+    <section id="payments-carousel" class="Carousel_card">
       <main class="main_cart">
-        <section class="container_card">
+        <!-- <label for="payments-list" class="section-label visually-hidden">بطاقات التبرعات</label> -->
+        <section id="payments-list" class="container_card">
 
           <?php foreach ($islamic_payments as $islamic_payment): ?>
 
             <div class="donation-card">
-              <a href="/islamic_payments_zakat">
-                <img src="views/media/images/<?= htmlspecialchars($islamic_payment['photo'] ?? "11.png") ?>" alt="مشروع نور السعودية">
+              <a href="/<?= htmlspecialchars($islamic_payment['page_link'])  ?>">
+                <img src="views/media/images/<?= htmlspecialchars($islamic_payment['photo'] ?? "11.png") ?>" alt="مشروع نور اليمن">
               </a>
+              <h2><?= htmlspecialchars($islamic_payment['name'] ) ?></h2>
               <div class="donation-info">
-                <div class="aghtha">
+              <h3><?= htmlspecialchars($islamic_payment['short_description']) ?></h3>
 
-                  <h5>رقم الحملة : <?= htmlspecialchars($islamic_payment['islamic_payment_id']) ?></h5>
-                  <a href=""><img src="" alt=""></a>
+                <div class="details">
+                  <a href="/<?= htmlspecialchars($islamic_payment['page_link'])  ?>">
+                    عرض التفاصيل</a>
                 </div>
-                <h3> <?= htmlspecialchars($islamic_payment['type']) ?> </h3>
-                <div class="progress-bar">
-                  <div class="progress"></div>
-                </div>
-                <div class="donation-details">
-                  <div>
-                    <p><strong style="display: inline;">$ <?= htmlspecialchars($islamic_payment['cost']) ?>/</strong><?= htmlspecialchars($islamic_payment['paid_cost']) ?></p>
-                  </div>
-                </div>
-                <div class="donate-section">
-                  <form action="/islamic_payments_donate" method="post" class="donate-section" required>
-                    <input class="inp" type="number" name="cost" placeholder="$" required min="0" max="<?= htmlspecialchars($islamic_payment['cost'] - $islamic_payment['paid_cost']) ?> >
-                    <input type="hidden" name="islamic_payment_id" value="<?= htmlspecialchars($islamic_payment['islamic_payment_id']) ?>">
-                    <button type="submit" class="donate-btn">تبرع الأن</button>
-                  </form>
-                  <form action="/islamic_payments_addcart" method="post">
-                    <input type="hidden" name="islamic_payment_id" value="<?= htmlspecialchars($islamic_payment['islamic_payment_id']) ?>">
-                    <button type="submit" class="donate_cart"><img src="views/media/images/cart.png" alt=""></button>
-                  </form>
-                </div>
-                <a href="/islamic_payments_zakat">
-                  <div class="details">عرض التفاصيل</div>
-                </a>
               </div>
             </div>
           <?php endforeach; ?>
         </section>
-        <section class="bar_action">
 
-        </section>
-      </main>
-
+        <?php if(! $filtered):include('views/parts/pagination.php'); endif?>
     </section>
-  </section>
+</main>
+</section>
+</section>
 </main>
 <?php require('views/parts/footer.php') ?>

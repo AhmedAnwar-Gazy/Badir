@@ -33,10 +33,8 @@ $methode = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 //يبدا عملية التوجيه
 $router->route($uri,$methode);
 
-
+//dd($_SESSION['user']);
 //يطعبع كل خصائص السرفر اسفل الصفحه
 
+// dd($_SERVER);
 
-if($_SESSION['user']){
-dd($_SESSION['user']);
-}

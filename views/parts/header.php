@@ -29,7 +29,7 @@ try {
                         placeholder="ابحث هنا "
                         value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
 
-                    <button type="submit" name="submit" value="search" class="my-items-btn">بحث</button>
+                    <button type="submit" name="submit" value="search" class="my-items-btn" aria-label="بحث">بحث</button>
 
                     <select name="filter" class="filter-select">
                         <option value="all" <?= ($_GET['filter'] ?? 'all') === 'all' ? 'selected' : '' ?>>الجميع</option>
@@ -40,9 +40,16 @@ try {
                             </option>
                         <?php endforeach; ?>
                     </select>
-                    <?php if ( false) : ?>
-                        <button type="submit" name="submit" value="foryou">خاصه بك</button>
+                    <?php if ($_SESSION['user'] ?? false) : ?>
+                    <?php if ($_SESSION['user']['type'] == "admin" || $_SESSION['user']['type'] == "manager") : ?>
+                        <label for="NotActivated">Not Activated</label>
+                    <input type="checkbox" name="NotActivated" id="NotActivated">
                     <?php endif; ?>
+                    <?php endif; ?>
+
+                    <? //php if ( false) : ?>
+                        <!-- <button type="submit" name="submit" value="foryou" aria-label="خاصة بك">خاصه بك</button> -->
+                    <?php // endif; ?>
                 </form>
 
 

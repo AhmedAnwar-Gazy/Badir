@@ -3,7 +3,7 @@ use core\App ;
 use core\Database ;
 $db = App::resolve(Database::class);
 
-$page = "charity_projects_index" ;
+$page = "charity_projects_manage" ;
 
 try {
     // Fetch categories for the dropdown
@@ -29,6 +29,7 @@ try {
             COALESCE(SUM(B.cost), 0) AS collected_money, 
             P.start_at, 
             P.end_at, 
+            P.beneficiaries_count,
             P.state, 
             P.directorate
         FROM 
@@ -57,6 +58,14 @@ try {
         $params['user_id'] = $_SESSION['user']['id'];
     }
 
+    //add activation filter
+    if (isset($_GET['NotActivated'])) {
+        $query .= " AND  P.state <> 'active' ";
+    } else {
+        $query .= " AND  P.state = 'active' " ;
+    }
+
+
 
     // 👌 Finalize Query
     $query .= " GROUP BY P.project_id ORDER BY P.start_at DESC;";
@@ -66,9 +75,7 @@ try {
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء جلب البيانات";
-    header("Location: /charity_campaigns_create");
-    exit();
+    abort(500);
 }
 
 

@@ -4,26 +4,36 @@
 <?php require('views/parts/header.php') ?>
 
 <main class="main_islamic_payments_zakat">
-  <section class="form_zakat">
+<label for="sadaqah-calculator" class="section-label visually-hidden"> </label>
+
+  <section id="sadaqah-calculator" class="form_zakat">
   <!-- حسابة  الصدقه-->
-  <form >
+  <!-- <form > -->
       <h2>حاسبة الصدقة</h2>
       
-      <label for="income">الدخل الشهري (بالريال)</label>
-      <input type="number" id="income" name="income" required>
+      <!-- <label for="income">الدخل الشهري (بالريال)</label>
+      <input type="number" id="income" name="income" required> -->
+<!-- 
+    <h2>احسب الصدقة</h2> -->
 
-      <label for="percent">نسبة الصدقة (%)</label>
-      <input type="number" id="percent" name="percent" value="2.5" required>
-
-      <button type="submit">احسب</button>
-
-     <input type="text" placeholder="ناتج الصدقة">
+    <div class="donate-section">
+    <form action="/islamic_payments_checkout" method="get" class="donate-section" required>
+      <input class="inp" type="number" name="cost" placeholder="$" required id="result">
+      <input type="hidden" name="islamic_payment_id" value="1">
+      <button type="submit" class="donate-btn3" aria-label="تبرع الأن">تبرع الأن</button>
     </form>
+    <form class="fromCart" action="/islamic_payments_addcart" method="post">
+      <input type="hidden" name="islamic_payment_id" value="1">
+      <button type="submit" class="donate_cart" aria-label="السله"><img src="views/media/images/cart.png" alt=""></button>
+    </form>
+  </div>
+
   </section>
 
 
+  <label for="sadaqah-info" class="section-label visually-hidden"></label>
 
-  <section >
+  <section id="sadaqah-info" class="info-section">
   <!-- تعريف عام  -->
   <form>
       <h2>عن الصدقة</h2>
@@ -58,7 +68,7 @@
         <li>أن تكون من مال حلال.</li>
         <li>عدم المنّ أو الرياء.</li>
       </ul>
-    </form>
+  </form>
 
   </section>
 </main>

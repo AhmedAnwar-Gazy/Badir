@@ -8,35 +8,56 @@ $db  = App::resolve(Database::class);
 
 
 
+$errors = [];
 
 
-$erorrs = [];
+if (empty($_POST['email'])) {
+    $errors['email'] = "الرجاء إدخال البريد الإلكتروني";
+}
+
+if (empty($_POST['password'])) {
+    $errors['password'] = "الرجاء إدخال كلمة المرور";
+}
+
 
 if (! Validator::email($_POST['email'])) {
-    $erorrs['email'] = "not a valid email ";
+    $errors['email'] = "ليسى البريد الإلكتروني صحيح";
 }
 if (! Validator::string($_POST['password'])) {
-    $erorrs['password'] = "password is not valid ";
+    $errors['password'] = "ليسى كلمة المرور صحيحة";
 }
 
-if (! empty($erorrs)) {
-    require 'views/sessions/create_view.php';
+if (!empty($errors)) {
+    $_SESSION['errors'] = $errors ;
+    header("Location:" . $_SERVER["HTTP_REFERER"]);
+    exit();
 }
-
-$user = $db->query("select * from users where email = :email ; ", [
-    "email" => $_POST['email']
-])->fetch();
-
+try {
+    $user = $db->query("select * from users where email = :email ; ", [
+        "email" => $_POST['email']
+    ])->fetch();
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    abort(500);
+}
 
 if ($user) {
     if (password_verify($_POST['password'], $user['password'])) {
         logIn($user);
         header("Location: /");
         exit();
+    }else{
+        $errors['password'] = "لا يوجد كلمة مرور مطابقة لهذا";
     }
+}else {
+    $errors['email'] = "لا يوجد بريد إلكتروني مطابق لهذا";
 }
 
 
-$erorrs['email'] = "There No Matching Email Or Password Like this";
 
-require 'views/pages/users/index_view.php';
+$_SESSION['errors'] = $errors ;
+header("Location:" . $_SERVER["HTTP_REFERER"]);
+exit();
+
+
+

@@ -26,7 +26,7 @@ try {
         $params['search'] = $search;
     }
 
-    if ($_GET['submit'] == "foryou") {
+    if (isset($_GET['submit']) && $_GET['submit'] == "foryou") {
         $query .= " AND u.user_id = :user_id";
         $params['user_id'] = $_SESSION['user']['id'];
     }
@@ -44,9 +44,7 @@ try {
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء جلب البيانات";
-    header("Location: /users");
-    exit();
+    abort(500);
 }
 
 

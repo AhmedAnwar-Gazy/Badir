@@ -1,8 +1,8 @@
 <?php
 $heading = "Create ";
 
-use core\App ;
-use core\Database ;
+use core\App;
+use core\Database;
 
 
 $db = App::resolve(Database::class);
@@ -16,15 +16,14 @@ try {
         "SELECT * FROM partners"
     )->fetchAll(); // Fetch all rows from the query result
     $notification = $db->query(
-        "SELECT * FROM notifications WHERE notification_id = :notification_id",[
-            'notification_id'=>$_GET['notification_id']]
+        "SELECT * FROM notifications WHERE notification_id = :notification_id",
+        [
+            'notification_id' => $_GET['notification_id']
+        ]
     )->findOrFail();
-
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء حفظ البعانات";
-    header("Location: /charity_campaigns_create");
-    exit();
+    abort(500);
 }
 
 

@@ -15,7 +15,10 @@
 
 
   <!-- الصوره الكبير الي بل البدايه -->
-  <section class="hero">
+
+  <label style="display: none;" for="hero-section" class="section-label">القسم الرئيسي</label>
+
+  <section id="hero-section" class="hero">
     <!-- <img src="views/media/images/andrewSmall.jpg" alt="">
     <h1  style="         font-size: var(--font-size-ll);  color : white;  margin: -110px 10px 0 0; text-align: right;">بِفَضْلِ تَبَرُّعاتِكُمْ، نَصْنَعُ فَرْقًا حَقِيقِيًّا فِي حَياةِ الْمُحْتاجِين</h1> -->
     <!-- <div class="slider">
@@ -59,7 +62,7 @@
     
     </div>
     </div> -->
-<!-- ................................ -->
+    <!-- ................................ -->
     <!-- <div class="slider">
     <div class="slides">
       <div class="slide"><img src="views/media/images/ali.jpg" alt="Slide 1"></div>
@@ -76,52 +79,54 @@
       <div class="dot"></div>
     </div>
   </div> -->
-  
-  <div class="slider">
-    <div class="slide active">
-      <img src="views/media/images/andrewSmall.jpg">
-      <h1>"إن تُقرضوا الله قرضًا حسنًا يُضاعفه لكم ويغفر لكم" – التغابن: 17
-      </h1>
-    </div>
-    <div class="slide">
-    <img src="views/media/images/ali.jpg" alt="">
-    <h1>مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ" – البقرة: 261</h1>
-    </div>
-    <div class="slide">
-    <img src="views/media/images/almwald.jpg" alt="">
-    <h1>"لن تنالوا البر حتى تنفقوا مما تحبون" – آل عمران: 92</h1>
-    </div>
-    <div class="slide">
-      <img src="https://placehold.co/800x400/ffff44/000?text=Slide+4">
-      <h1>"كل امرئٍ في ظل صدقته يوم القيامة" – رواه أحمد
-      </h1>
-    </div>
+
+    <div class="slider">
+      <div class="slide active">
+        <img src="views/media/images/ali.jpg" alt=" منازل قديمة" loading="lazy">
+        <h1>"إن تُقرضوا الله قرضًا حسنًا يُضاعفه لكم ويغفر لكم" – التغابن: 17
+        </h1>
+      </div>
+      <div class="slide">
+        <img src="views/media/images/andrewSmall.jpg" alt="شجرة دم الأخوين" loading="lazy">
+        <h1>مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ" – البقرة: 261</h1>
+      </div>
+      <div class="slide">
+        <img src="views/media/images/almwald.jpg" alt="المسجد النبوي" loading="lazy">
+        <h1>"لن تنالوا البر حتى تنفقوا مما تحبون" – آل عمران: 92</h1>
+      </div>
+      <div class="slide">
+        <img src="views/media/images/gah.png" alt="القاهرة" loading="lazy">
+        <h1>"كل امرئٍ في ظل صدقته يوم القيامة" – رواه أحمد
+        </h1>
+      </div>
 
 
-    <div class="dots">
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
+      <div class="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
 
-    <div class="btns">
-    <img class="btn prev-btn" src="views/media/images/left.png" alt="">
-    <img class="btn " src="views/media/images/next.png" alt="">
+      <div class="btns">
+        <img class="btn prev-btn" src="views/media/images/left.png" alt="السابق" loading="lazy">
+        <img class="btn " src="views/media/images/next.png" alt="التالي" loading="lazy">
 
-      <!-- <button class="btn prev-btn">⏮️ السابق</button>
+        <!-- <button class="btn prev-btn">⏮️ السابق</button>
       <button class="btn next-btn">التالي ⏭️</button> -->
+      </div>
     </div>
-  </div>
 
 
 
   </section>
 
 
-  <h1 style=" margin: 110px;    text-align: center;    color: var(--font-color-bh); ">الصَّدَقَةُ لَا تَنْقُصُ الْمَالَ، بَلْ تَزِيدُهُ بَرَكَةً وَطُهْرًا</h1>
+  <h1 style="         margin: var(--margin-xl); text-align: center;    color: var(--bgcolor-dark); ">الصَّدَقَةُ لَا تَنْقُصُ الْمَالَ، بَلْ تَزِيدُهُ بَرَكَةً وَطُهْرًا</h1>
 
-  <section class="Carousel_card box ">
+  <label style="display: none;" for="campaigns-section" class="section-label">حملات التبرع</label>
+
+  <section id="campaigns-section" class="Carousel_card box ">
     <!-- حاوية البطاقات -->
 
     <main class="main_cart">
@@ -133,7 +138,7 @@
             </a>
             <div class="donation-info">
               <div class="aghtha">
-                <h6 >بادر</h6>
+                <h6><?= htmlspecialchars($categories[$campaign['category_id']]['name']) ?></h6>
                 <h5>رقم الحملة : <?= htmlspecialchars($campaign['campaign_id']) ?></h5>
                 <!-- <a href=""><img src="" alt=""></a> -->
               </div>
@@ -146,15 +151,17 @@
                   <p><strong style="display: inline;">$ <?= htmlspecialchars($campaign['collected_money']) ?>/</strong><?= htmlspecialchars($campaign['cost']) ?></p>
                 </div>
               </div>
+
               <div class="donate-section">
-                <form action="/charity_campaigns_donate" method="post" class="donate-section">
-                  <input class="inp" type="number" name="cost" placeholder="$">
+                <!-- إذا كان المستخدم مسجل الدخول -->
+                <form action="/charity_campaigns_checkout" method="get" class="donate-section">
+                  <input class="inp" type="number" name="cost" placeholder="$" required min="0" max="<?= htmlspecialchars($campaign['cost'] - $campaign['collected_money']) ?>">
                   <input type="hidden" name="campaign_id" value="<?= htmlspecialchars($campaign['campaign_id']) ?>">
-                  <button type="submit" class="donate-btn">تبرع الأن</button>
+                  <button type="submit" class="donate-btn" aria-label="التبرع">تبرع الأن</button>
                 </form>
                 <form action="/charity_campaigns_addcart" method="post">
                   <input type="hidden" name="campaign_id" value="<?= htmlspecialchars($campaign['campaign_id']) ?>">
-                  <button type="submit" class="donate_cart"><img src="views/media/images/cart.png" alt=""></button>
+                  <button type="submit" class="donate_cart"><img src="views/media/images/cart.png" alt="السلة" loading="lazy" aria-label="السلة"></button>
                 </form>
               </div>
               <div class="details">
@@ -175,15 +182,17 @@
 
   </section>
   <!-- الاحداث السريعه -->
-  <h1 style="background-color: white; color: var(--font-color-bh);text-align: center;         margin: var(--margin-xl); " >بِتَكاتُفِنا، نَسْتَطِيعُ تَحْقِيقَ الْمُسْتَحِيل </h1>
+  <h1 style="background-color: white; color: var(--bgcolor-dark);text-align: center;         margin: var(--margin-xl); ">بِتَكاتُفِنا، نَسْتَطِيعُ تَحْقِيقَ الْمُسْتَحِيل </h1>
 
-  <section  class="Fast-acting" >
+  <label style="display: none;" for="stats-section" class="section-label">الإحصائيات</label>
+
+  <section id="stats-section" class="Fast-acting">
     <div class="tbr3">
 
 
-      <div class="t3 box" >
+      <div class="t3 box">
         <p>بفضل كرمكم تجاوزنا الكثير من التبرعات. معاً نصنع الفرق.</p>
-        <P class="pt">عدد عمليات التبرع <br><span>25,7 ألف</span> <br> عملية تبرع</P>
+        <P class="pt">عدد عمليات التبرع <br><span><?= $users_statistics['donates_count'] ?></span> <br> عملية تبرع</P>
       </div>
       <hr>
       <div class="t3 box">
@@ -192,7 +201,7 @@
           وغيرنا بهم حياة الكثيرين.
         </p>
         <p class="pt">عددالمشاريع المكتملة<br><span>
-            25,7 ألف </span><br> مشروع</p>
+            <?php echo $projects_statistics['completed']['completed'] ?></span><br> مشروع</p>
       </div>
       <hr>
 
@@ -200,33 +209,38 @@
         <p>بفضل الله ثم بدعمكم السخي، وصلنا إلى هذاالعدد
           من المستفيدين وغيرنا حياتهم للأفضل
         </p>
-        <p class="pt">عدد المستفيدين<br><span>25,7ألف</span><br>مستفيد</p>
+        <p class="pt">عدد المستفيدين<br><span><?php echo $beneficiaries_project_campain['beneficiaries_count'] ?></span><br>مستفيد</p>
       </div>
     </div>
 
     <div class="login_home box">
-      <h1> بإنشاء حسابك
+      <h1 style="color: var(--bgcolor-dark);"> بإنشاء حسابك
       </h1>
       <p id="plogin">
         تحصل على فرصة للمشاركة <br>
         في مشاريعنا المميزة والمساهمة في بناء مجتمع أفضل
       </p>
 
-      <div class="login_tbr3 "  >
+      <div class="login_tbr3 ">
+      <?php  if (!isset($_SESSION['user'])) : ?>
         <div class="login_for_home_and_tbr3 box">
           <p>خطواتك الأولى نحو العطاء تبدأ من هنا.
             انشئ حساباَ واستكشف الفرص للمساهمة في الخير.<br>
           </p>
-          <button href="">إنشاء حساب</button>
-
+          <a href="/users_create">
+            <button type="button" aria-label=" انشاء حساب">إنشاء حساب</button>
+          </a>
         </div>
+        <?php endif ?>
         <div class="login_for_home_and_tbr3 box">
           <p>
             تبرعك اليوم يصنع فرقاً، غداً كن جزءاً من الخير.<br>
             لا تتردد، تبرعك اليوم قد يغير حياة شخصاً، كن سبباً في سعادته.
           </p>
-          <button href="">تبرع الان</button>
-          <!-- <a href="/charity_campaigns_donate">تبرع الان</a> -->
+
+          <a href="/charity_campaigns_show?campaign_id=<?= $campaign_needest['campaign_id'] ?? "1" ?>">
+            <button aria-label="تبرع الان">تبرع الان</button>
+          </a>
         </div>
 
       </div>

@@ -1,7 +1,8 @@
 <?php
 $heading = "one test";
-use core\App ;
-use core\Database ;
+
+use core\App;
+use core\Database;
 
 
 $db = App::resolve(Database::class);
@@ -16,17 +17,15 @@ try {
     $partners = $db->query(
         "SELECT * FROM partners"
     )->fetchAll(); // Fetch all rows from the query result
-    $partners = $db->query("SELECT * from partners where partner_id = :partner_id",[
+    $partners = $db->query("SELECT * from partners where partner_id = :partner_id", [
         'partner_id' => $_GET['partner_id']
     ])->fetchAll();
-
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء حفظ البعانات";
-    header("Location: /charity_campaigns_create");
-    exit();
+    abort(500);
 }
 
+visible($partners);
 
 // $note = $db->query("SELECT * from executive_partners where id = :id ", [
 //   'id' => $_GET['id'],
